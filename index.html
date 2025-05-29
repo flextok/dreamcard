@@ -114,13 +114,12 @@
       opacity: 1;
     }
 
-    /* Unique styling for hidden message */
+    /* Hidden message style: keep frame, text normal */
     #hidden p {
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-style: italic;
-      line-height: 1.8;
+      font-family: Arial, sans-serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      line-height: 1.7;
       max-width: 700px;
       margin: 0 auto;
       padding: 30px 40px;
@@ -131,11 +130,12 @@
         0 0 6px #9aca3c,
         0 0 12px #c4f16c,
         0 0 20px #d4f577;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
       box-shadow:
         0 0 20px #9aca3c inset;
       user-select: text;
       white-space: pre-line;
+      font-style: normal;
     }
 
     /* Video container */
@@ -236,6 +236,43 @@
         0 0 8px #c4f16c;
     }
 
+    /* About Us styling */
+    #about p {
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      color: #9aca3c;
+      text-shadow:
+        0 0 4px #9aca3c,
+        0 0 8px #c4f16c;
+    }
+
+    #about .links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    #about .links a {
+      color: #9ACA3C;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+
+    #about .links a:hover {
+      color: #c4f16c;
+      border-color: #c4f16c;
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 120px 15px 40px 15px;
@@ -264,6 +301,15 @@
       .video-container {
         margin-top: 15px;
       }
+
+      #about .links {
+        gap: 15px;
+        flex-direction: column;
+      }
+
+      #about .links a {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -278,115 +324,53 @@
     <a class="active" onclick="showSection('hidden', this)">1. Hidden Message & Video</a>
     <a onclick="showSection('collabs', this)">2. Collabs & Our World</a>
     <a onclick="showSection('vision', this)">3. The Vision</a>
+    <a onclick="showSection('about', this)">4. About Us</a>
   </nav>
 
   <section id="hidden" class="active">
     <p>
+      Only the rare hold this card.<br>
+      You chose the dream. You chose yourself.<br><br>
       You are not like them.<br>
       You imagine more, you believe more.<br>
       And you act on it.<br><br>
-
-      This card is proof.<br>
-      Proof that you're one of the ones who didn’t wait for permission.<br><br>
-
       Keep dreaming.<br>
       Keep creating.<br>
-      Keep being loud.<br><br>
-
-      <strong>“You don’t just wear 7elm — you carry the dream.”</strong>
+      Keep being loud.
     </p>
 
     <div class="video-container">
-      <iframe 
-        src="https://www.youtube.com/embed/Ba3XChf5SYg" 
-        title="7elm Dream Card Video" 
-        allowfullscreen 
-        allow="autoplay; encrypted-media"
-      ></iframe>
+      <iframe src="https://www.youtube.com/embed/Bxp1EfTAqwc" title="7elm Dream Video" allowfullscreen></iframe>
     </div>
   </section>
 
   <section id="collabs">
     <div class="collab-cards">
       <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab1.jpg?v=1748556400" alt="Collab 1" />
-        <h4>Urban Pulse</h4>
-        <p>Bringing streetwear vibes to life with bold prints and edgy designs. Founded in NYC, Urban Pulse inspires creativity in every stitch.</p>
-        <p>Instagram: <a href="https://instagram.com/urbanpulse" target="_blank">@urbanpulse</a></p>
-        <p>Website: <a href="https://urbanpulse.com" target="_blank">urbanpulse.com</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab2.jpg?v=1748556401" alt="Collab 2" />
-        <h4>Neon Nomads</h4>
-        <p>Explorers of light and color, Neon Nomads blend futuristic aesthetics with raw street culture, redefining urban fashion.</p>
-        <p>Instagram: <a href="https://instagram.com/neonnomads" target="_blank">@neonnomads</a></p>
-        <p>Website: <a href="https://neonnomads.com" target="_blank">neonnomads.com</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab3.jpg?v=1748556402" alt="Collab 3" />
-        <h4>Streetwave Collective</h4>
-        <p>A dynamic collective channeling the energy of city streets into wearable art. Their pieces speak louder than words.</p>
-        <p>Instagram: <a href="https://instagram.com/streetwave" target="_blank">@streetwave</a></p>
-        <p>Website: <a href="https://streetwave.co" target="_blank">streetwave.co</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab4.jpg?v=1748556403" alt="Collab 4" />
-        <h4>Pixel Rebels</h4>
-        <p>Fusing digital art and fashion, Pixel Rebels craft bold, pixelated designs that challenge the norm and inspire rebellion.</p>
-        <p>Instagram: <a href="https://instagram.com/pixelrebels" target="_blank">@pixelrebels</a></p>
-        <p>Website: <a href="https://pixelrebels.com" target="_blank">pixelrebels.com</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab5.jpg?v=1748556404" alt="Collab 5" />
-        <h4>Concrete Canvas</h4>
-        <p>Turning urban walls into wearable stories, Concrete Canvas merges graffiti culture with fashion to create living art.</p>
-        <p>Instagram: <a href="https://instagram.com/concretecanvas" target="_blank">@concretecanvas</a></p>
-        <p>Website: <a href="https://concretecanvas.org" target="_blank">concretecanvas.org</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab6.jpg?v=1748556405" alt="Collab 6" />
-        <h4>Vibe Mechanics</h4>
-        <p>Engineered for the streets, Vibe Mechanics create apparel that blends function with fierce fashion for everyday warriors.</p>
-        <p>Instagram: <a href="https://instagram.com/vibemechanics" target="_blank">@vibemechanics</a></p>
-        <p>Website: <a href="https://vibemechanics.com" target="_blank">vibemechanics.com</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab7.jpg?v=1748556406" alt="Collab 7" />
-        <h4>Echo Tribe</h4>
-        <p>Echo Tribe harnesses the power of sound and rhythm to inspire designs that resonate with urban spirit and culture.</p>
-        <p>Instagram: <a href="https://instagram.com/echotribe" target="_blank">@echotribe</a></p>
-        <p>Website: <a href="https://echotribe.com" target="_blank">echotribe.com</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab8.jpg?v=1748556407" alt="Collab 8" />
-        <h4>Gravity Flux</h4>
-        <p>Defying gravity and expectations, Gravity Flux pushes fashion boundaries with kinetic designs and bold innovation.</p>
-        <p>Instagram: <a href="https://instagram.com/gravityflux" target="_blank">@gravityflux</a></p>
-        <p>Website: <a href="https://gravityflux.io" target="_blank">gravityflux.io</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab9.jpg?v=1748556408" alt="Collab 9" />
-        <h4>Nightshade Guild</h4>
-        <p>Nightshade Guild blends mysticism with street style, crafting apparel that whispers secrets of the night.</p>
-        <p>Instagram: <a href="https://instagram.com/nightshadeguild" target="_blank">@nightshadeguild</a></p>
-        <p>Website: <a href="https://nightshadeguild.com" target="_blank">nightshadeguild.com</a></p>
-      </div>
-
-      <div class="collab-card">
-        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab10.jpg?v=1748556409" alt="Collab 10" />
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/solardrift_300x300.png?v=1748556359" alt="Solar Drift" />
         <h4>Solar Drift</h4>
-        <p>Solar Drift captures cosmic energy and urban motion, merging them into apparel that lights up the streets.</p>
-        <p>Instagram: <a href="https://instagram.com/solardrift" target="_blank">@solardrift</a></p>
+        <p>Creators of cosmic-inspired streetwear blending futuristic design with urban culture. Their limited editions elevate the rare and the bold.</p>
+        <p>Instagram: <a href="https://www.instagram.com/solardrift" target="_blank">@solardrift</a></p>
         <p>Website: <a href="https://solardrift.com" target="_blank">solardrift.com</a></p>
       </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/neonwave_300x300.png?v=1748556360" alt="Neon Wave" />
+        <h4>Neon Wave</h4>
+        <p>A streetwear collective inspired by neon city lights and retro synth beats. They bring vibrant energy and bold statements to every piece.</p>
+        <p>Instagram: <a href="https://www.instagram.com/neonwave" target="_blank">@neonwave</a></p>
+        <p>Website: <a href="https://neonwave.com" target="_blank">neonwave.com</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/urbanphantom_300x300.png?v=1748556361" alt="Urban Phantom" />
+        <h4>Urban Phantom</h4>
+        <p>Masters of shadow and light in street fashion, Urban Phantom creates pieces that tell stories of the unseen city, blending mystery with style.</p>
+        <p>Instagram: <a href="https://www.instagram.com/urbanphantom" target="_blank">@urbanphantom</a></p>
+        <p>Website: <a href="https://urbanphantom.com" target="_blank">urbanphantom.com</a></p>
+      </div>
+
+      <!-- Add more collabs here if needed -->
     </div>
   </section>
 
@@ -398,22 +382,28 @@
     </p>
   </section>
 
+  <section id="about">
+    <p>
+      7elm is a movement — a community of dreamers, creators, and rebels who refuse to blend in.<br>
+      We celebrate individuality and bold self-expression through every design.<br>
+      Join us on this journey and become part of a culture that is loud, proud, and unapologetically you.
+    </p>
+    <div class="links">
+      <a href="https://www.instagram.com/7elm_egy1/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.tiktok.com/@7elm.egy1" target="_blank" rel="noopener noreferrer">TikTok</a>
+      <a href="https://7elm-eg.online" target="_blank" rel="noopener noreferrer">Website</a>
+    </div>
+  </section>
+
   <script>
     function showSection(id, linkElement) {
-      // Hide all sections
       document.querySelectorAll('section').forEach(section => {
         section.classList.remove('active');
       });
-
-      // Remove active from all nav links
       document.querySelectorAll('nav a').forEach(a => {
         a.classList.remove('active');
       });
-
-      // Show selected section
       document.getElementById(id).classList.add('active');
-
-      // Mark clicked nav as active
       linkElement.classList.add('active');
     }
   </script>
