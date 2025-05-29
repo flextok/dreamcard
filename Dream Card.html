@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7elm Dream Card</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* vertical centering */
+      background: url('https://cdn.shopify.com/s/files/1/0811/3356/8288/files/story_template_different_frame.jpg?v=1748552562') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Arial', sans-serif;
+      color: #9ACA3C;
+      /* prevent scrolling */
+      overflow: hidden;
+      padding: 20px; /* some breathing room on very small screens */
+      box-sizing: border-box;
+      min-height: 100vh;
+      min-width: 100vw;
+    }
+
+    /* Frame container exactly inside the frame */
+    .frame-container {
+      width: 860px;  /* Adjust width to fit inside your frame */
+      height: 570px; /* Adjust height to fit inside your frame */
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      box-sizing: border-box;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto;
+      /* Add subtle shadow/glow to separate from background */
+      box-shadow: 0 0 20px 5px rgba(154, 202, 60, 0.5);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      color: #9ACA3C;
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: text-shadow 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active-link {
+      text-shadow: 0 0 8px #9ACA3C;
+    }
+
+    section {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      flex: 1 1 auto;
+      overflow-y: auto;
+      color: #9ACA3C;
+    }
+
+    section.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      margin-top: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(154, 202, 60, 0.7);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .collab-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-y: auto;
+      max-height: 400px;
+    }
+
+    .collab-card {
+      background-color: rgba(0,0,0,0.7);
+      border: 1px solid #9ACA3C;
+      border-radius: 10px;
+      padding: 12px;
+      width: 240px;
+      color: #9ACA3C;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    .collab-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .collab-card h4 {
+      margin: 6px 0 4px;
+    }
+
+    .collab-card p {
+      margin: 3px 0;
+      font-size: 0.85rem;
+    }
+
+    /* Scrollbar for overflow */
+    .frame-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .frame-container::-webkit-scrollbar-thumb {
+      background: #9ACA3C;
+      border-radius: 4px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 900px) {
+      .frame-container {
+        width: 100%;
+        height: auto;
+        max-height: 90vh;
+        padding: 20px;
+      }
+      nav {
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      nav a {
+        font-size: 1rem;
+      }
+      .collab-cards {
+        max-height: none;
+        flex-direction: column;
+        align-items: center;
+      }
+      .collab-card {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="frame-container">
+    <nav>
+      <a href="#" class="active-link" onclick="showSection('hidden', event)">1. Hidden Message & Video</a>
+      <a href="#" onclick="showSection('collabs', event)">2. Collabs & Our World</a>
+      <a href="#" onclick="showSection('vision', event)">3. The Vision</a>
+    </nav>
+
+    <section id="hidden" class="active">
+      <h2>The Hidden Story</h2>
+      <p>Behind every Dream Card is a message — this is for those who refused to be ordinary.</p>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id="collabs">
+      <h2>Our Collabs & Other World</h2>
+      <p>With your Dream Card, you access more than fashion. Collaborations with bold brands. Entry to private drops. Invitations to our events. Welcome to the other world.</p>
+      <div class="collab-cards">
+        <!-- example cards -->
+        <div class="collab-card">
+          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
+          <h4>Brand Name 1</h4>
+          <p><strong>Location:</strong> Cairo, Egypt</p>
+          <p><strong>Contact:</strong> +20 123 456 7890</p>
+          <p><strong>Instagram:</strong> @brand1</p>
+        </div>
+        <!-- add more cards as needed -->
+      </div>
+    </section>
+
+    <section id="vision">
+      <h2>The Vision of 7elm</h2>
+      <p>We don’t sell clothes. We sell belief. Movement. Identity. Every thread you wear is part of a dream louder than the world itself.</p>
+    </section>
+  </div>
+
+  <script>
+    function showSection(id, event) {
+      event.preventDefault();
+      document.querySelectorAll('nav a').forEach(link => link.classList.remove('active-link'));
+      event.currentTarget.classList.add('active-link');
+
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+        section.style.display = 'none';
+      });
+
+      const activeSection = document.getElementById(id);
+      activeSection.style.display = 'block';
+      setTimeout(() => activeSection.classList.add('active'), 10);
+    }
+  </script>
+
+</body>
+</html>
