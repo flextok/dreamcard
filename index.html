@@ -2,30 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>7elm Dream Card</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('https://cdn.shopify.com/s/files/1/0811/3356/8288/files/story_template_different_frame.jpg?v=1748552562') no-repeat center center fixed;
-      background-size: cover;
-      color: #9ACA3C;
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      justify-content: flex-start;
-      min-height: 100vh;
+    @keyframes flickerBorder {
+      0%, 100% { border-color: #9ACA3C; }
+      50% { border-color: #c4f16c; }
     }
 
-    /* Container to keep content inside the frame */
-    .frame-container {
-      max-width: 900px;
-      margin: 40px auto 60px;
-      padding: 20px 30px;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 12px;
+    body {
+      margin: 0;
+      padding: 0 20px;
+      background: #000000;
+      font-family: 'Arial', sans-serif;
+      color: #9ACA3C;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 140px;
+      min-height: 100vh;
       box-sizing: border-box;
-      width: 100%;
+      position: relative;
+    }
+
+    .logo-container {
+      position: relative;
+      z-index: 2;
+      margin-top: -100px;
+    }
+
+    .logo-container img {
+      max-width: 160px;
+      height: auto;
+      filter: drop-shadow(0 0 10px #9ACA3C);
+    }
+
+    .watermark-7 {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: url('https://cdn.shopify.com/s/files/1/0811/3356/8288/files/water_mark.png?v=1748556359') no-repeat center center;
+      background-size: 300px;
+      opacity: 0.035;
+      width: 300px;
+      height: 300px;
+      pointer-events: none;
+      z-index: 0;
     }
 
     nav {
@@ -33,7 +57,9 @@
       flex-direction: column;
       align-items: center;
       gap: 30px;
-      margin-top: 0; /* margin inside container now */
+      margin-top: 30px;
+      user-select: none;
+      z-index: 2;
     }
 
     nav a {
@@ -41,12 +67,31 @@
       text-decoration: none;
       font-size: 1.5rem;
       font-weight: bold;
-      transition: all 0.3s ease;
       cursor: pointer;
+      position: relative;
+      padding-bottom: 4px;
+      transition: all 0.3s ease;
     }
 
-    nav a:hover, nav a.active-link {
-      text-shadow: 0 0 10px #9ACA3C;
+    nav a:hover,
+    nav a.active {
+      text-shadow: 0 0 12px #9ACA3C;
+      color: #c4f16c;
+    }
+    nav a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 100%;
+      background: #9ACA3C;
+      box-shadow:
+        0 0 8px #9ACA3C,
+        0 0 12px #9ACA3C,
+        0 0 20px #c4f16c;
+      border-radius: 2px;
+      animation: flickerBorder 2s infinite;
     }
 
     section {
@@ -57,7 +102,11 @@
       text-align: center;
       margin-top: 40px;
       padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
       color: #9ACA3C;
+      box-sizing: border-box;
+      z-index: 2;
     }
 
     section.active {
@@ -65,10 +114,35 @@
       opacity: 1;
     }
 
+    /* Unique styling for hidden message */
+    #hidden p {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 30px 40px;
+      background: rgba(10, 20, 10, 0.85);
+      border-radius: 18px;
+      color: #9aca3c;
+      text-shadow:
+        0 0 6px #9aca3c,
+        0 0 12px #c4f16c,
+        0 0 20px #d4f577;
+      letter-spacing: 0.04em;
+      box-shadow:
+        0 0 20px #9aca3c inset;
+      user-select: text;
+      white-space: pre-line;
+    }
+
+    /* Video container */
     .video-container {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
       margin-top: 20px;
@@ -83,6 +157,7 @@
       border: none;
     }
 
+    /* Collabs styling */
     .collab-cards {
       display: flex;
       flex-wrap: wrap;
@@ -92,176 +167,255 @@
     }
 
     .collab-card {
-      background-color: rgba(17, 17, 17, 0.8);
-      border: 1px solid #9ACA3C;
+      background-color: rgba(17, 17, 17, 0.85);
+      border: 1.5px solid #9ACA3C;
       border-radius: 12px;
       padding: 20px;
-      width: 250px;
+      width: 280px;
       text-align: left;
       color: #9ACA3C;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: flickerBorder 4s infinite alternate;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .collab-card:hover {
+      box-shadow:
+        0 0 8px #9ACA3C,
+        0 0 16px #9ACA3C,
+        0 0 24px #c4f16c;
+      border-color: #c4f16c;
+      transform: translateY(-5px);
     }
 
     .collab-card img {
       width: 100%;
       border-radius: 8px;
-      margin-bottom: 10px;
+      object-fit: cover;
+      height: 150px;
+      flex-shrink: 0;
     }
 
     .collab-card h4 {
-      margin: 10px 0 5px;
+      margin: 0;
+      font-size: 1.3rem;
     }
 
     .collab-card p {
-      margin: 5px 0;
-      font-size: 0.9rem;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.3;
     }
 
-    /* Mobile optimization */
+    .collab-card a {
+      color: #9ACA3C;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .collab-card a:hover {
+      color: #c4f16c;
+      text-decoration: underline;
+    }
+
+    /* Vision styling */
+    #vision p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      text-shadow:
+        0 0 4px #9aca3c,
+        0 0 8px #c4f16c;
+    }
+
     @media (max-width: 768px) {
-      .frame-container {
-        margin: 20px 15px 40px;
-        padding: 15px 20px;
+      body {
+        padding: 120px 15px 40px 15px;
       }
+
       nav {
         gap: 20px;
       }
+
       nav a {
         font-size: 1.3rem;
+        padding-bottom: 6px;
       }
-      .collab-cards {
-        flex-direction: column;
-        align-items: center;
+
+      section {
+        margin-top: 30px;
+        padding: 15px;
       }
+
       .collab-card {
         width: 100%;
-        max-width: 320px;
+        max-width: 350px;
+        padding: 15px;
+      }
+
+      .video-container {
+        margin-top: 15px;
       }
     }
   </style>
 </head>
 <body>
-
-  <div class="frame-container">
-    <nav>
-      <a href="#" class="active-link" onclick="showSection('hidden', event)">1. Hidden Message & Video</a>
-      <a href="#" onclick="showSection('collabs', event)">2. Collabs & Our World</a>
-      <a href="#" onclick="showSection('vision', event)">3. The Vision</a>
-    </nav>
-
-    <section id="hidden" class="active">
-      <h2>The Hidden Story</h2>
-      <p>Behind every Dream Card is a message — this is for those who refused to be ordinary.</p>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
-      </div>
-    </section>
-
-    <section id="collabs">
-      <h2>Our Collabs & Other World</h2>
-      <p>With your Dream Card, you access more than fashion. Collaborations with bold brands. Entry to private drops. Invitations to our events. Welcome to the other world.</p>
-      <div class="collab-cards">
-        <!-- Example 10 collab cards with placeholder data -->
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 1</h4>
-          <p><strong>Location:</strong> Cairo, Egypt</p>
-          <p><strong>Contact:</strong> +20 123 456 7890</p>
-          <p><strong>Instagram:</strong> @brand1</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 2</h4>
-          <p><strong>Location:</strong> Alexandria, Egypt</p>
-          <p><strong>Contact:</strong> +20 987 654 3210</p>
-          <p><strong>Instagram:</strong> @brand2</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 3</h4>
-          <p><strong>Location:</strong> Giza, Egypt</p>
-          <p><strong>Contact:</strong> +20 456 789 1234</p>
-          <p><strong>Instagram:</strong> @brand3</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 4</h4>
-          <p><strong>Location:</strong> Luxor, Egypt</p>
-          <p><strong>Contact:</strong> +20 321 654 9870</p>
-          <p><strong>Instagram:</strong> @brand4</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 5</h4>
-          <p><strong>Location:</strong> Aswan, Egypt</p>
-          <p><strong>Contact:</strong> +20 789 123 4567</p>
-          <p><strong>Instagram:</strong> @brand5</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 6</h4>
-          <p><strong>Location:</strong> Sharm El Sheikh, Egypt</p>
-          <p><strong>Contact:</strong> +20 654 321 0987</p>
-          <p><strong>Instagram:</strong> @brand6</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 7</h4>
-          <p><strong>Location:</strong> Hurghada, Egypt</p>
-          <p><strong>Contact:</strong> +20 987 321 6540</p>
-          <p><strong>Instagram:</strong> @brand7</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 8</h4>
-          <p><strong>Location:</strong> Tanta, Egypt</p>
-          <p><strong>Contact:</strong> +20 123 789 4560</p>
-          <p><strong>Instagram:</strong> @brand8</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 9</h4>
-          <p><strong>Location:</strong> Mansoura, Egypt</p>
-          <p><strong>Contact:</strong> +20 321 987 6540</p>
-          <p><strong>Instagram:</strong> @brand9</p>
-        </div>
-        <div class="collab-card">
-          <img src="https://via.placeholder.com/250x150" alt="Brand Logo">
-          <h4>Brand Name 10</h4>
-          <p><strong>Location:</strong> Suez, Egypt</p>
-          <p><strong>Contact:</strong> +20 456 123 7890</p>
-          <p><strong>Instagram:</strong> @brand10</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="vision">
-      <h2>The Vision of 7elm</h2>
-      <p>We don’t sell clothes. We sell belief. Movement. Identity. Every thread you wear is part of a dream louder than the world itself.</p>
-    </section>
+  <div class="logo-container">
+    <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/Untitled-3_e4854ed6-fedf-4bff-a7c6-374813d2d9f3.png?v=1748556392" alt="7elm Logo" />
   </div>
 
+  <div class="watermark-7"></div>
+
+  <nav>
+    <a class="active" onclick="showSection('hidden', this)">1. Hidden Message & Video</a>
+    <a onclick="showSection('collabs', this)">2. Collabs & Our World</a>
+    <a onclick="showSection('vision', this)">3. The Vision</a>
+  </nav>
+
+  <section id="hidden" class="active">
+    <p>
+      You are not like them.<br>
+      You imagine more, you believe more.<br>
+      And you act on it.<br><br>
+
+      This card is proof.<br>
+      Proof that you're one of the ones who didn’t wait for permission.<br><br>
+
+      Keep dreaming.<br>
+      Keep creating.<br>
+      Keep being loud.<br><br>
+
+      <strong>“You don’t just wear 7elm — you carry the dream.”</strong>
+    </p>
+
+    <div class="video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/Ba3XChf5SYg" 
+        title="7elm Dream Card Video" 
+        allowfullscreen 
+        allow="autoplay; encrypted-media"
+      ></iframe>
+    </div>
+  </section>
+
+  <section id="collabs">
+    <div class="collab-cards">
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab1.jpg?v=1748556400" alt="Collab 1" />
+        <h4>Urban Pulse</h4>
+        <p>Bringing streetwear vibes to life with bold prints and edgy designs. Founded in NYC, Urban Pulse inspires creativity in every stitch.</p>
+        <p>Instagram: <a href="https://instagram.com/urbanpulse" target="_blank">@urbanpulse</a></p>
+        <p>Website: <a href="https://urbanpulse.com" target="_blank">urbanpulse.com</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab2.jpg?v=1748556401" alt="Collab 2" />
+        <h4>Neon Nomads</h4>
+        <p>Explorers of light and color, Neon Nomads blend futuristic aesthetics with raw street culture, redefining urban fashion.</p>
+        <p>Instagram: <a href="https://instagram.com/neonnomads" target="_blank">@neonnomads</a></p>
+        <p>Website: <a href="https://neonnomads.com" target="_blank">neonnomads.com</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab3.jpg?v=1748556402" alt="Collab 3" />
+        <h4>Streetwave Collective</h4>
+        <p>A dynamic collective channeling the energy of city streets into wearable art. Their pieces speak louder than words.</p>
+        <p>Instagram: <a href="https://instagram.com/streetwave" target="_blank">@streetwave</a></p>
+        <p>Website: <a href="https://streetwave.co" target="_blank">streetwave.co</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab4.jpg?v=1748556403" alt="Collab 4" />
+        <h4>Pixel Rebels</h4>
+        <p>Fusing digital art and fashion, Pixel Rebels craft bold, pixelated designs that challenge the norm and inspire rebellion.</p>
+        <p>Instagram: <a href="https://instagram.com/pixelrebels" target="_blank">@pixelrebels</a></p>
+        <p>Website: <a href="https://pixelrebels.com" target="_blank">pixelrebels.com</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab5.jpg?v=1748556404" alt="Collab 5" />
+        <h4>Concrete Canvas</h4>
+        <p>Turning urban walls into wearable stories, Concrete Canvas merges graffiti culture with fashion to create living art.</p>
+        <p>Instagram: <a href="https://instagram.com/concretecanvas" target="_blank">@concretecanvas</a></p>
+        <p>Website: <a href="https://concretecanvas.org" target="_blank">concretecanvas.org</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab6.jpg?v=1748556405" alt="Collab 6" />
+        <h4>Vibe Mechanics</h4>
+        <p>Engineered for the streets, Vibe Mechanics create apparel that blends function with fierce fashion for everyday warriors.</p>
+        <p>Instagram: <a href="https://instagram.com/vibemechanics" target="_blank">@vibemechanics</a></p>
+        <p>Website: <a href="https://vibemechanics.com" target="_blank">vibemechanics.com</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab7.jpg?v=1748556406" alt="Collab 7" />
+        <h4>Echo Tribe</h4>
+        <p>Echo Tribe harnesses the power of sound and rhythm to inspire designs that resonate with urban spirit and culture.</p>
+        <p>Instagram: <a href="https://instagram.com/echotribe" target="_blank">@echotribe</a></p>
+        <p>Website: <a href="https://echotribe.com" target="_blank">echotribe.com</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab8.jpg?v=1748556407" alt="Collab 8" />
+        <h4>Gravity Flux</h4>
+        <p>Defying gravity and expectations, Gravity Flux pushes fashion boundaries with kinetic designs and bold innovation.</p>
+        <p>Instagram: <a href="https://instagram.com/gravityflux" target="_blank">@gravityflux</a></p>
+        <p>Website: <a href="https://gravityflux.io" target="_blank">gravityflux.io</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab9.jpg?v=1748556408" alt="Collab 9" />
+        <h4>Nightshade Guild</h4>
+        <p>Nightshade Guild blends mysticism with street style, crafting apparel that whispers secrets of the night.</p>
+        <p>Instagram: <a href="https://instagram.com/nightshadeguild" target="_blank">@nightshadeguild</a></p>
+        <p>Website: <a href="https://nightshadeguild.com" target="_blank">nightshadeguild.com</a></p>
+      </div>
+
+      <div class="collab-card">
+        <img src="https://cdn.shopify.com/s/files/1/0811/3356/8288/files/collab10.jpg?v=1748556409" alt="Collab 10" />
+        <h4>Solar Drift</h4>
+        <p>Solar Drift captures cosmic energy and urban motion, merging them into apparel that lights up the streets.</p>
+        <p>Instagram: <a href="https://instagram.com/solardrift" target="_blank">@solardrift</a></p>
+        <p>Website: <a href="https://solardrift.com" target="_blank">solardrift.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="vision">
+    <p>
+      Our vision is to empower you to stand apart, to be unapologetically unique in a world of copies.<br>
+      7elm is more than streetwear — it’s your signature, your statement, your identity.<br>
+      We build bold designs for the bold souls who dare to be the one and only.
+    </p>
+  </section>
+
   <script>
-    function showSection(id, event) {
-      event.preventDefault();
-
-      // Remove active class from all nav links
-      document.querySelectorAll('nav a').forEach(link => link.classList.remove('active-link'));
-
-      // Add active class to clicked link
-      event.currentTarget.classList.add('active-link');
-
+    function showSection(id, linkElement) {
       // Hide all sections
       document.querySelectorAll('section').forEach(section => {
         section.classList.remove('active');
-        section.style.display = 'none';
       });
 
-      // Show active section
-      const activeSection = document.getElementById(id);
-      activeSection.style.display = 'block';
-      setTimeout(() => activeSection.classList.add('active'), 10);
+      // Remove active from all nav links
+      document.querySelectorAll('nav a').forEach(a => {
+        a.classList.remove('active');
+      });
+
+      // Show selected section
+      document.getElementById(id).classList.add('active');
+
+      // Mark clicked nav as active
+      linkElement.classList.add('active');
     }
   </script>
-
 </body>
 </html>
