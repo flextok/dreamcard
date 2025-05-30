@@ -19,9 +19,10 @@
     }
 
     .logo {
-      width: 150px; /* Adjust based on logo size */
+      width: 250px; /* Default size, larger for mobile */
       margin: 20px auto;
       display: block;
+      text-align: center;
     }
 
     .menu {
@@ -33,7 +34,7 @@
     .menu a {
       display: block;
       color: #9ACA3C;
-      font-size: 1.2rem; /* Smaller for mobile, scales up on desktop */
+      font-size: 1.2rem;
       text-decoration: none;
       margin: 10px 0;
       text-transform: uppercase;
@@ -55,12 +56,12 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background: rgba(0, 0, 0, 0.6);
-      padding: 15px; /* Reduced padding for mobile */
+      padding: 15px;
       border: 2px solid #9ACA3C;
       border-radius: 10px;
       text-align: center;
-      width: 85%; /* Wider on mobile for content */
-      max-width: 400px; /* Reduced max-width for mobile */
+      width: 85%;
+      max-width: 400px;
       box-shadow: 0 0 10px #9ACA3C;
     }
 
@@ -71,13 +72,13 @@
     .section h2 {
       color: #9ACA3C;
       margin-top: 0;
-      font-size: 1.3rem; /* Adjusted for mobile */
+      font-size: 1.3rem;
       text-shadow: 0 0 5px #9ACA3C;
     }
 
     .section p {
       color: #9ACA3C;
-      font-size: 0.9rem; /* Smaller text for mobile */
+      font-size: 0.9rem;
     }
 
     .return-btn {
@@ -151,11 +152,11 @@
       text-decoration: none;
     }
 
-    /* Mobile-specific adjustments */
+    /* Mobile-specific adjustments (max-width: 600px) */
     @media (max-width: 600px) {
       .logo {
-        width: 120px; /* Smaller logo on mobile */
-        margin: 15px auto;
+        width: 250px; /* Even larger logo on mobile */
+        margin: 40px auto; /* Increased margin for prominence */
       }
 
       .menu a {
@@ -196,10 +197,11 @@
       }
     }
 
-    /* Desktop adjustments */
+    /* Desktop adjustments (min-width: 601px) */
     @media (min-width: 601px) {
       .logo {
-        width: 150px;
+        width: 300px; /* Larger logo on desktop */
+        margin: 50px auto;
       }
 
       .menu a {
@@ -314,7 +316,7 @@
   </div>
 
   <div class="footer">
-    <p>© 2025, 7elm</p>
+    <p>© 2025, 7elm | Website by FHMedia</p>
     <a href="https://instagram.com/7elm_egy1" target="_blank">Instagram</a>
     <a href="https://tiktok.com/@7elm.egy1" target="_blank">TikTok</a>
   </div>
